@@ -2,6 +2,7 @@ from logging.config import fileConfig
 from sqlalchemy.ext.asyncio import create_async_engine
 from alembic import context
 from database import Base  # Импортируем Base из ваших моделей
+from models import ToDo, User
 import asyncio
 
 # Ваши модели должны быть импортированы для autogenerate

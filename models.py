@@ -8,7 +8,7 @@ from sqlalchemy.dialects.postgresql import ENUM
 
 class task_status(Enum):
     DONE = 'Выполнено'
-    IN_PROGRESS = 'В процсессе'
+    IN_PROGRESS = 'В процессе'
     PLANNED = 'В планах'
 
 
@@ -32,6 +32,7 @@ class ToDo(Base):
     description: Mapped[str] = mapped_column(String(1000))
     created: Mapped[DateTime] = mapped_column(DateTime, server_default=func.now())
     plan_date:  Mapped[Date] = mapped_column(Date)
+    # priority: Mapped[]
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
     owner: Mapped[User] = relationship('User', back_populates='todos')
 

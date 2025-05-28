@@ -6,7 +6,7 @@ from shemas import UserCreate, UserResponse, ToDoCreate, ToDoResponse, ToDoUpdat
 from models import User, ToDo
 from security import get_current_user
 
-router = APIRouter(prefix="/tasks", tags=["tasks"])
+router = APIRouter(prefix="/api/tasks", tags=["api tasks"])
 
 
 @router.post('/create/', status_code=201)

@@ -9,7 +9,7 @@ from passlib.context import CryptContext
 from security import get_current_user, create_access_token, ACCESS_TOKEN_EXPIRE_MINUTES
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-router = APIRouter(prefix="/auth", tags=["tasks"])
+router = APIRouter(prefix="/auth", tags=["auth"])
 
 
 @router.post('/register/', response_model=UserResponse)
