@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>METANIT.COM</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+<h2>
+        {% if person.languages %}
+            {{ person.languages }}
+        {% endif %}
+    </h2>
+    <h2>Форма ввода</h2>
+    <form action="postdata" method="post">
+        <p>
+            Name:<br>
+            <input name="username" />
+        </p>
+        <p>
+            Languages:<br>
+            <input name="languages" /><br><br>
+            <input name="languages" /><br><br>
+            <input name="languages" /><br><br>
+        </p>
+        <input type="submit" value="Send" />
+    </form>
+</body>
+</html>
