@@ -2,9 +2,9 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select, update, delete
 from sqlalchemy.ext.asyncio import AsyncSession
 from database import get_db
-from shemas import UserCreate, UserResponse, ToDoCreate, ToDoResponse, ToDoUpdate
+from shemas import ToDoCreate, ToDoResponse, ToDoUpdate
 from models import User, ToDo
-from security import get_current_user
+from api_service.security import get_current_user
 
 router = APIRouter(prefix="/api/tasks", tags=["api tasks"])
 

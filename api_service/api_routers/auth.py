@@ -2,14 +2,17 @@ from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
+from fastapi.templating import Jinja2Templates
 from database import get_db
-from shemas import UserCreate, UserResponse, ToDoCreate
-from models import User, ToDo
+from shemas import UserCreate, UserResponse
+from models import User
 from passlib.context import CryptContext
-from security import get_current_user, create_access_token, ACCESS_TOKEN_EXPIRE_MINUTES
+from api_service.security import create_access_token, ACCESS_TOKEN_EXPIRE_MINUTES
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 router = APIRouter(prefix="/auth", tags=["auth"])
+web_router = APIRouter(prefix="/web", tags=["auth-web"])
+templates = Jinja2Templates(directory='static/html')
 
 
 @router.post('/register/', response_model=UserResponse)

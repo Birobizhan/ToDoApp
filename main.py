@@ -1,18 +1,16 @@
-from fastapi import APIRouter, Depends, FastAPI, Body, Request, Form
-from sqlalchemy import text
-from sqlalchemy.ext.asyncio import AsyncSession
-from database import get_db
-from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel
-from fastapi.responses import FileResponse, HTMLResponse
+from fastapi import FastAPI, Request, Form
 from fastapi.templating import Jinja2Templates
-from routers.todo import router as router_todo
-from routers.auth import router as router_auth
+from api_service.api_routers.todo import router as router_todo
+from api_service.api_routers.auth import router as auth_api
+from web_service.web_routers.auth import web_router as auth_web
+from web_service.web_routers.web_todo import router as router_web
 
 app = FastAPI()
 templates = Jinja2Templates(directory='static/html')
 app.include_router(router_todo)
-app.include_router(router_auth)
+app.include_router(auth_api)
+app.include_router(router_web)
+app.include_router(auth_web)
 
 
 @app.get('/')
