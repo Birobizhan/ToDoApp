@@ -13,28 +13,29 @@
         <p class="error">{{ error }}</p>
     {% endif %}
 
-    <form method="post">
+    <form method="post" action="/tasks/update/{{task_id}}">
         <label>
             Название задачи:
-            <input type="text" name="title" required>
+            <input type="text" name="title" value="{{task.title}}" required>
         </label><br>
 
         <label>
             Статус:
-            <input type="text" name="status" required>
+<select name="status">
+    <option value="Выполнено" {% if task.status.value =="Выполнено" %}selected{% endif %}>Выполнено</option>
+    <option value="В процессе" {% if task.status.value =="В процессе" %}selected{% endif %}>В процессе</option>
+    <option value="В планах" {% if task.status.value =="В планах"%}selected{% endif %}>В планах</option>
+  </select>
         </label><br>
 
         <label>
             Описание:
-            <input type="text" name="description" required>
+            <input type="text" name="description" value="{{task.description}}" required>
         </label><br>
 
-        <label>
-            Дата планирования:
-            <input type="text" name="plan_date" required>
-        </label><br>
+        <label>Дата планирования:<input type="date" name="plan_date" value="{{task.plan_date}}" required></label><br>
 
-        <button type="submit">Создать задачу</button>
+        <button type="submit">Изменить задачу</button>
     </form>
 
 </body>

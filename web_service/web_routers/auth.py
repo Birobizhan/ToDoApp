@@ -6,7 +6,7 @@ from fastapi.templating import Jinja2Templates
 from database import get_db
 from models import User
 from passlib.context import CryptContext
-from api_service.security import create_access_token, ACCESS_TOKEN_EXPIRE_MINUTES
+from web_service.security import create_access_token
 
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -33,9 +33,7 @@ async def register(request: Request, username: str = Form(), email: str = Form()
                     hash_password=hashed_password)
     db.add(new_user)
     await db.commit()
-    access_token = create_access_token(data={"sub": username})
     response = RedirectResponse(url="/tasks/login", status_code=303)
-    response.set_cookie(key="access_token", value=f"Bearer {access_token}", httponly=True)
     return response
 
 
@@ -62,12 +60,11 @@ async def login(request: Request, username: str = Form(), password: str = Form()
     access_token = create_access_token(data={"sub": username})
     response = RedirectResponse(url="/tasks/", status_code=303)
     response.set_cookie(key="access_token", value=f"Bearer {access_token}", httponly=True)
-    print('set_cookie')
     return response
 
 
 @web_router.get('/logout/', response_class=RedirectResponse)
 async def logout():
-    response = RedirectResponse(url="/tasks/login/")
+    response = RedirectResponse(url="/web/login/", status_code=303)
     response.delete_cookie("access_token")
     return response

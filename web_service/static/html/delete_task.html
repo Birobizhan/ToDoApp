@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Удаление записи</title>
+
+</head>
+<body>
+    <form method="POST" action="/tasks/delete/{{task_id}}">
+        <p>Вы действительно хотите удалить запись?</p>
+
+        <button type="submit">Удалить</button>
+        <a href="/tasks/" class="button">Отмена</a>
+
+    </form>
+
+</body>
+</html>
